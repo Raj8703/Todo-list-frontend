@@ -11,7 +11,7 @@ const App = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5500/api/todos/getall")
+      .get("https://todo-mern-kzr5.onrender.com/api/todos/getall")
       .then((res) => setTodos(res.data));
   }, []);
 
@@ -21,20 +21,24 @@ const App = () => {
       return;
     }
     axios
-      .post("http://localhost:5500/api/todos/add", { text: newTodo })
+      .post("https://todo-mern-kzr5.onrender.com/api/todos/add", {
+        text: newTodo,
+      })
       .then((res) => setTodos([...todos, res.data]));
     setNewTodo("");
   };
 
   const deleteTodo = (id) => {
-    axios.delete(`http://localhost:5500/api/todos/${id}`).then(() => {
-      setTodos(todos.filter((todo) => todo._id !== id));
-    });
+    axios
+      .delete(`https://todo-mern-kzr5.onrender.com/api/todos/${id}`)
+      .then(() => {
+        setTodos(todos.filter((todo) => todo._id !== id));
+      });
   };
 
   const toggleComplete = (id, isCompleted) => {
     axios
-      .patch(`http://localhost:5500/api/todos/${id}`, {
+      .patch(`https://todo-mern-kzr5.onrender.com/api/todos/${id}`, {
         isCompleted: !isCompleted,
       })
       .then(() => {
@@ -50,7 +54,9 @@ const App = () => {
   };
   const editTodo = (id, updatedText) => {
     axios
-      .put(`http://localhost:5500/api/todos/${id}`, { text: updatedText })
+      .put(`https://todo-mern-kzr5.onrender.com/api/todos/${id}`, {
+        text: updatedText,
+      })
       .then((res) => {
         // Update the todo in the state instead of removing it
         setTodos(
